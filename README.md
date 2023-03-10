@@ -1,2 +1,1 @@
-initial readme wow ! 
-
+==Whos that Pokemon==
