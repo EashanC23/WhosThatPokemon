@@ -1,11 +1,11 @@
-# Whos that Pokemon
+# Whos that Pokémon
 
 ---
 
-The idea of this react app is to recreate the classic Pokémon game Whos That Pokémon? as seen in the Pokémon anime.
+The idea of this react app is to recreate the classic Pokémon game Whos That Pokémon? as seen in the Pokémon anime.   
 I also mainly used this as a project to practice my react and web dev skills.
 
-to run this on your own machine run the following commands: 
+To run this on your own machine run the following commands: 
 ```
 git clone https://github.com/EashanC23/WhosThatPokemon
 cd WhosThatPokemon
