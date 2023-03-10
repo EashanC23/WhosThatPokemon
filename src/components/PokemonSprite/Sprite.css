@@ -1,0 +1,6 @@
+ImageFilter { 
+	filter: brightness(0%);
+	visibility: visible;
+	background-color: black;
+	height: 100%;
+}
