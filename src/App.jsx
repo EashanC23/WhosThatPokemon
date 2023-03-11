@@ -3,13 +3,11 @@ import "./App.css";
 // import Loader from "./components/loader/Loader";
 import pokemonList from "./pokemon.js";
 import StatsBox from "./components/StatsBox/StatsBox";
-import Sprite from "./components/PokemonSprite/Sprite";
+// import Sprite from "./components/PokemonSprite/Sprite";
+// import InputBox from "./components/InputBox/UserInput";
 
 function App() {
-  const [gameData, setGameData] = useState({
-    spriteBrightness: 0,
-
-  })
+  const testList = ["a","b","c","d","e"];
   const [guessedPokemonData, setguessedPokemonData] = useState({
     name: "", // to initialize all the values so that it doesnt die on first load
     sprites: "",
@@ -71,9 +69,13 @@ function App() {
   }, []);
 
   const correctGuessHandler = () => {
+    const sprite = document.getElementById("sprite");
+    sprite.style.filter = "none";
     alert("You Got it! ");
+    setScore(score + 1);
     intialFetchguessedPokemonData();
     guessInputRef.current.value = "";
+    setTimeout({}, 1000);
     setToGuessPokemon({
       id: 0,
       height: 0,
@@ -83,7 +85,7 @@ function App() {
   };
 
   const incorrectGuessHandler = () => {
-    if (tryCount < 3) {
+    if (tryCount <= 3) {
       alert(" Try again " + (3 - tryCount) + " tries remaining.");
       setTryCount(tryCount + 1);
       guessInputRef.current.value = "";
@@ -93,6 +95,7 @@ function App() {
       if (score > highScore) {
         localStorage.setItem("highScore", score);
       }
+      setScore(0);
       guessInputRef.current.value = "";
       setToGuessPokemon({
         id: 0,
@@ -106,6 +109,7 @@ function App() {
 
   const guessHandler = async (event) => {
     event.preventDefault();
+    setTryCount(tryCount + 1);
     const guessCurrentPokemon = guessInputRef.current.value.toLowerCase();
     if (!pokemonList.includes(guessCurrentPokemon)) {
       alert("not a pokemon name. Try again.");
@@ -121,7 +125,10 @@ function App() {
           setToGuessPokemon(data);
           // console.log(data);
           if (data.name === guessedPokemonData.name) {
+            const sprite = document.getElementById("sprite");
+            sprite.style.filter = "none";
             correctGuessHandler();
+
           } else {
             incorrectGuessHandler();
           }
@@ -141,17 +148,16 @@ function App() {
         <div>loading</div>
       ) : (
         <div>
-          <p> {guessedPokemonData.name.toUpperCase()} </p>
-        {/*<img
+          {/*<img
             src={guessedPokemonData.sprites.front_default}
             alt="pokemon sprite"
             data-caman="brightness=(-100)"
           />*/}
-          <img src={guessedPokemonData.sprites.front_default} style={{width: '70%', height: '70%', filter: 'contrast(0%) brightness(0%)'}}/> 
+          <img id="sprite" src={guessedPokemonData.sprites.front_default} style={{ width: '70%', height: '70%', filter: 'contrast(0%) brightness(0%)' }} />
         </div>
       )}
       <form onSubmit={guessHandler}>
-        <input ref={guessInputRef}></input>
+        <input ref={guessInputRef} />
       </form>
       <button onClick={intialFetchguessedPokemonData}> New Pokémon</button>
       <div>
@@ -193,6 +199,12 @@ function App() {
       <p>score: {score}</p>
       <p>high score: {highScore} </p>
       <p>tries: {tryCount} </p>
+
+        {testList.map((pokemon) => {
+          <p>{pokemon}</p>
+          // <option> {pokemon} </option>
+        }
+        )}
     </div>
   );
 }
