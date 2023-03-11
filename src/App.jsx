@@ -143,23 +143,19 @@ function App() {
   // COMPONENT RENDERING
   return (
     <div className="main">
+      unorganized brrr
       {isLoading ? (
         // <Loader />
         <div>loading</div>
       ) : (
         <div>
-          {/*<img
-            src={guessedPokemonData.sprites.front_default}
-            alt="pokemon sprite"
-            data-caman="brightness=(-100)"
-          />*/}
           <img id="sprite" src={guessedPokemonData.sprites.front_default} style={{ width: '70%', height: '70%', filter: 'contrast(0%) brightness(0%)' }} />
         </div>
       )}
       <form onSubmit={guessHandler}>
         <input ref={guessInputRef} />
       </form>
-      <button onClick={intialFetchguessedPokemonData}> New Pokémon</button>
+      <button onClick={intialFetchguessedPokemonData}>New Pokémon</button>
       <div>
         <p>
           Height: {!isLoading ? guessedPokemonData.height : "loading"}
@@ -171,7 +167,7 @@ function App() {
           {/* Type : {guessedPokemonData.types} */}
         </p>
         {isLoading ? (
-          "meow"
+          "loading"
         ) : (
           <>
             <StatsBox
