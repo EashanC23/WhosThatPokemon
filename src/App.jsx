@@ -143,7 +143,6 @@ function App() {
   // COMPONENT RENDERING
   return (
     <div className="main">
-      unorganized brrr
       {isLoading ? (
         // <Loader />
         <div>loading</div>
