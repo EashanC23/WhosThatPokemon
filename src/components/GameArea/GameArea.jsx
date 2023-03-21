@@ -2,6 +2,8 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from "rea
 import pokemonList from "../../pokemon";
 import AppContext from "../../store/app-context";
 import UserInput from "../InputBox/UserInput";
+import Loader from "../Loader/Loader";
+import "./GameArea.css";
 
 function GameArea() {
   const ctx = useContext(AppContext);
@@ -49,10 +51,13 @@ function GameArea() {
     const sprite = document.getElementById("sprite");
     sprite.style.filter = "none";
     alert("You Got it! ");
-    ctx.setScore(ctx.score + 1);
-    intialFetchguessedPokemonData();
     resetToGuessPokemon();
-    guessInputRef.current.value = "";
+    setTimeout(() => {
+      ctx.setScore(ctx.score + 1);
+      if (ctx.score > ctx.highScore) ctx.setHighScore(ctx.score);
+      intialFetchguessedPokemonData();
+      guessInputRef.current.value = "";
+    }, 1000);
   };
 
   const incorrectGuessHandler = () => {
@@ -122,27 +127,31 @@ function GameArea() {
 
   return (
     <>
-      {ctx.isLoading ? (
-        <div>loading</div>
-      ) : (
-        <div>
-          <span>
-            <img id="sprite" src={ctx.guessedPokemon.sprites.front_default} style={{ width: '30vh', height: '30vh', filter: 'contrast(0%) brightness(0%)' }} />
-          </span>
-        </div>
-      )}
-      <form onSubmit={guessHandler}>
-        {/*<input ref={guessInputRef} list="pokemonDataList" />*/}
-        <UserInput ref={guessInputRef} />
-        <datalist id="pokemonDataList">
+      <div className="container">
+        {ctx.isLoading ? (
+          <Loader width="10vh"/>
+        ) : (
+          <div className="spriteBox">
+            <span>
+              <img id="sprite" src={ctx.guessedPokemon.sprites.front_default} style={{ width: '30vh', height: '30vh', filter: 'contrast(0%) brightness(0%)' }} />
+            </span>
+          </div>
+        )}
+        <div className="input">
+          <form onSubmit={guessHandler}>
+            {/*<input ref={guessInputRef} list="pokemonDataList" />*/}
+            <UserInput ref={guessInputRef} />
+            {/*<datalist id="pokemonDataList">
           {pokemonList.map((pokemon) => {
             return (
               <option> {pokemon} </option>
             )
           }
           )}
-        </datalist>
-      </form>
+        </datalist>*/}
+          </form>
+        </div>
+      </div>
     </>
   )
 }

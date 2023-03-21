@@ -11,13 +11,9 @@ import StatsArea from "./components/StatsArea/StatsArea";
 function App() {
   return (
     <AppContextProvider>
-      <div style={{ height: "100vh" }}>
-        <div style={{ height: "1vh", display: "inline-block", position: "static", minWidth:"50vh" }}>
-          <GameArea className="GameArea" />
-        </div>
-        <div style={{ height: "1vh", display: "inline-block", position: "static" }}>
-          <StatsArea />
-        </div>
+      <div className="parent" >
+          <GameArea className="gameArea" />
+          <StatsArea className="statsArea"/>
       </div>
     </AppContextProvider>
   );

@@ -5,17 +5,8 @@ import StatsBox from "../StatsBox/StatsBox";
 function StatsArea() {
 	const ctx = useContext(AppContext);
 	return (
-		<div>
-			<div>
-				<p>
-					Height: {!ctx.isLoading ? ctx.guessedPokemon.height : "loading"}
-					<br />
-					Weight : {!ctx.isLoading ? ctx.guessedPokemon.weight : "loading"}
-					<br />
-					Id : {!ctx.isLoading ? ctx.guessedPokemon.id : "loading"}
-					<br />
-					{/* Type : {ctx.guessedPokemon.types} */}
-				</p>
+		<div className="container">
+			<div className="pokemonStats">
 				{ctx.isLoading ? (
 					"loading"
 				) : (
@@ -24,26 +15,28 @@ function StatsArea() {
 							guessedStat={ctx.guessedPokemon.height}
 							referenceStat={ctx.toGuessPokemon.height}
 						>
-							Height: {ctx.toGuessPokemon.height}
+							Height
 						</StatsBox>
 						<StatsBox
 							guessedStat={ctx.guessedPokemon.weight}
 							referenceStat={ctx.toGuessPokemon.weight}
 						>
-							Weight: {ctx.toGuessPokemon.weight}
+							Weight
 						</StatsBox>
 						<StatsBox
 							guessedStat={ctx.guessedPokemon.id}
 							referenceStat={ctx.toGuessPokemon.id}
 						>
-							ID: {ctx.toGuessPokemon.id}
+							ID
 						</StatsBox>
 					</>
 				)}
 			</div>
-			<p>score: {ctx.score}</p>
-			<p>high score: {ctx.highScore} </p>
-			<p>tries: {ctx.tryCount} </p>
+			<div className="playerStats">
+				<p>score: {ctx.score}</p>
+				<p>high score: {ctx.highScore} </p>
+				<p>tries: {ctx.tryCount} </p>
+			</div >
 		</div >
 	)
 }

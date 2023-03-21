@@ -41,12 +41,20 @@
   color: #888;
 }
 
-statsBox {
-  margin-top: 10px;
+.parent{
+  height: 100vh;
+  display: flex;
 }
-.GameArea { 
-  position: absolute;
-  background-color: blue;
-  height: 40vh;
-  width: 40vh;
+.gameArea .statsArea{
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+.gameArea{
+  justify-content: flex-start;
+  text-align: center;
+}
+.statsArea{
+  justify-content: flex-end;
+  text-align:center ;
 }
